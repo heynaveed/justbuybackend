@@ -99,7 +99,6 @@ AllProducts.get("/cart",auth,async(req,res)=>{
   console.log(CartItems);
   res.send(CartItems);
 })
-
 // ADD A PRODUCT IN MENS COLLECTION
 AllProducts.post("/men",async(req,res)=>{
     const {productImg,category,rating,description,finalprice,strickprice,tribeprice,seller}=req.body;
@@ -185,7 +184,8 @@ AllProducts.delete("/cart",auth,async(req,res)=>{
 
 // DELETE SINGLE ITEMS WITH RESPECT USER_ID IF THE USRE REMOVES IT FROM CART
 AllProducts.delete("/cart/:deleteid",auth,async(req,res)=>{
-    const payload=req.body._id;
+    const payload=req.params.deleteid;
+    console.log("pay",payload);
     const payload1= req.body.user;
      const mydelete= await CartModel.deleteMany({_id:payload,user_id:payload1});
      res.send(mydelete);
